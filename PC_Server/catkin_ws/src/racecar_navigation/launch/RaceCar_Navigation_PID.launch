@@ -1,0 +1,51 @@
+<launch>
+
+    <master auto ="start" />
+   
+     <!-- Run the Map Server -->
+        <node name="map_server" pkg="map_server" type="map_server" args="$(find racecar_navigation)/maps/ROOM_2.yaml" />
+        
+    <!-- Run AMCL -->
+        <include file="$(find racecar_navigation)/launch/RaceCar_AMCL.launch" />
+    
+    <!-- Run Move_Base and its related Nodes -->
+        <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      
+
+      <!-- 2D Costmap : Global and Local -->
+        <rosparam file="$(find racecar_navigation)/params/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find racecar_navigation)/params/carlike/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find racecar_navigation)/params/carlike/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find racecar_navigation)/params/carlike/global_costmap_params.yaml" command="load" />
+
+      <!-- Move_Base Configuration -->
+        <rosparam file="$(find racecar_navigation)/params/move_base_params.yaml" command="load" />
+
+      <!-- Local Planner -->
+        <rosparam file="$(find racecar_navigation)/params/teb_local_planner_params.yaml" command="load" />
+
+      <!-- Global Planner -->
+        <rosparam file="$(find racecar_navigation)/params/base_global_planner_params.yaml" command="load" /> 
+
+        </node> 
+    
+    <!-- Run RVIZ for Visualization --> 
+        <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find racecar_navigation)/rviz/RaceCar_Navigation_Visualization.rviz" />  
+    
+   
+    <!-- Convert the Twist Message from Local Planner to Ackermann Message !!! -->
+    <!--    <node name="cmd_vel_to_ackermann_drive" pkg="base_controller" type="cmd_vel_to_ackermann_drive.py" />  -->
+ 
+    <!-- Run Base_Controller Node -->
+       <!-- <include file="$(find base_controller)/launch/base_controller.launch" /> -->
+
+
+    <!-- Ackermann Base Controller with PID -->
+ <!--       <node pkg="base_controller" type="PID_Base_Controller.py" name="pid_base_controller_node" /> -->
+
+    
+</launch>
+
+
+
+  

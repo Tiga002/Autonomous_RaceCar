@@ -1,0 +1,9 @@
+<launch>
+
+   
+    <!-- JoyStick Control -->
+        <node pkg="joy" type="joy_node" name="joy_node" />
+        <node pkg="car_joystick" type="car_joystick" name="js_controller" />
+      <!--   <node pkg="serial_communication" type="send_command.py" name="auto_mode" />  -->
+
+</launch>

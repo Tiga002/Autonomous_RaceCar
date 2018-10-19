@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/Autonomous_RaceCar/catkin_ws/devel
+
+Name: car_joystick
+Description: Description of car_joystick
+Version: 0.0.0
+Cflags: -I/home/ubuntu/Autonomous_RaceCar/catkin_ws/src/car_joystick/include
+Libs: -L/home/ubuntu/Autonomous_RaceCar/catkin_ws/devel/lib -ljs_controller
+Requires: joy roscpp std_msgs

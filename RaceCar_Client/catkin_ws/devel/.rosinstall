@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ubuntu/Autonomous_RaceCar/catkin_ws/devel/setup.sh

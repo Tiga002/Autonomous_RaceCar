@@ -1,0 +1,9 @@
+NavfnROS:
+    # Navfn is used for global path planning
+    allow_unknown: true
+    planner_window_x: 0.0
+    planner_window_y: 0.0
+    default_tolerance: 0.0
+    visualize_potential: false
+
+

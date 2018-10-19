@@ -1,0 +1,14 @@
+<launch>
+
+    <!-- Launch Gmapping on the server -->
+        <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" >
+            <param name="base_frame" value="base_link" />
+            <param name="odom_frame" value="odom" />
+            <param name="delta" value="0.1" />
+        </node>
+
+    <!-- Launch RVIZ on the Server Side too ^^ --> 
+        <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find racecar_navigation)/rviz/RaceCar_Navigation_SLAM.rviz" />
+
+</launch>
+

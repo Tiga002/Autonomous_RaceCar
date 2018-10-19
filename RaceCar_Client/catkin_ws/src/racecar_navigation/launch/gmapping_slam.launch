@@ -1,0 +1,22 @@
+<launch>
+    <!-- Laser Scan Data -->
+        <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+    <!-- Gmapping SLAM -->
+        <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" >
+            <param name="base_frame" value="base_link" />
+            <param name="odom_frame" value="odom" />
+            <param name="delta" value="0.1" />
+        </node>
+    <!-- Odom -->
+        <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch" />
+        <include file="$(find robot_localization)/launch/ekf_fuse_odom.launch" />
+    <!-- TF --> 
+        <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0.5 0 0 0 base_link laser 100" />
+    <!-- JoyStick Control -->
+        <node pkg="joy" type="joy_node" name="joy_node" />
+        <node pkg="car_joystick" type="car_joystick" name="car_joystick" />
+        <node pkg="serial_communication" type="send_command.py" name="auto_mode" />
+    <!-- RVIZ -->
+    <!--     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find racecar_navigation)/rviz/RaceCar_Navigation_SLAM.rviz" />  -->
+</launch>
+

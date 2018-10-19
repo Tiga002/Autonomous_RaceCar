@@ -1,0 +1,8 @@
+prefix=/home/SENSETIME/leunghoyin/Documents/Autonomous_RaceCar/catkin_ws/install
+
+Name: car_joystick
+Description: Description of car_joystick
+Version: 0.0.0
+Cflags: -I/home/SENSETIME/leunghoyin/Documents/Autonomous_RaceCar/catkin_ws/install/include
+Libs: -L/home/SENSETIME/leunghoyin/Documents/Autonomous_RaceCar/catkin_ws/install/lib -ljs_controller
+Requires: joy roscpp std_msgs

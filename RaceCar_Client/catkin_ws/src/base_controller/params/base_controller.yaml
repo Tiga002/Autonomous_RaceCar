@@ -1,0 +1,11 @@
+## PID Parameters
+ 
+# Throttle: 
+Kp_throttle: 120.0
+Kd_throttle: 0
+
+# Steerling:
+Kp_steerling: 50.0
+Kd_steerling: 0
+
+

@@ -1,0 +1,55 @@
+DWAPlannerROS:
+    controller_frequency: 3.0
+    planner_frequency: 1.0
+    # Velocity Limits
+    max_vel: 0.45
+    min_vel: 0.2
+    max_vel_theta: 5.0
+    min_in_place_vel_theta: 0.4
+
+    # Acceleration Limits 
+    acc_lim_theta: 3.2
+    acc_lim_x: 2.5
+    acc_lin_y: 2.5
+
+    holonomic_robot: false
+
+    ## Advanced Tuning !!! ~~~~~
+
+    # Since DWA is actually a forward simulating, sim_time directs the time duration for the sampled velocity to be simulated
+    # sim_time <==> time allowed for the robot to move with the sampled velocities
+    sim_time: 4
+
+    # Defines Number of Samples to generate
+    vx_samples: 10
+    vy_samples: 0
+    vth_sample: 10
+
+    # Define how frequent should the points on the generated trajectories to be examed ( test whether intersects with any obstacle or not)
+    sim_granularity: 0.07
+
+
+    # DWA Cost Function Calculation Parameters
+    # DWA local planner choose the trajectory with the lowest cost, and the cost function is based on 3 factors
+    # 1) path_distance_bias <-> weight for how much the local planner should stay close to the global path
+    path_distance_bias: 32.0
+   
+    # 2) goal_distance_bias <-> weight for how much the robot should attempt to reach the local goal, with whatever path 
+    goal_distance_bias: 20.0
+
+    #3) occdist_scale <-> weight for how much the robot should attempt to avoid obstacles ( max. no. of obstacle cost along the trajectory ) 
+    occdist_scale: 0.02 
+
+
+    ## Goal Distance Tolerance ~~ 
+    yaw_goal_tolerance: 0.05
+    xy_goal_tolerance: 0.1
+    latch_xy_goal_tolerance: false
+
+    
+    ## Oscillation Suppression 
+    # Since in some place, like doorways ; the robot need to move back and forth to produce a path which allow it to pass through
+    # To prevent the robot keeps oscilate, we can set the minimum distance for the robot to move before it can travel in an opposite direction(flag resets)
+    osscillation_reset_dist: 0.05
+
+  

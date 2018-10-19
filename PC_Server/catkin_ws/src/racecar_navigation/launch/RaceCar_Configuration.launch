@@ -1,0 +1,11 @@
+<launch>
+  <!-- Sensors -->
+    <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+    <include file="$(find razor_imu_9dof)/launch/razor-pub.launch" />
+  <!-- Odometry -->
+    <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch" />
+    <include file="$(find robot_localization)/launch/ekf_fuse_odom.launch" />
+  <!-- TF Configuration -->
+     <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0.5 0 0 0 base_link laser 100"/>
+
+</launch>

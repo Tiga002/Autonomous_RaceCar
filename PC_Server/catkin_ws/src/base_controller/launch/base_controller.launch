@@ -1,0 +1,10 @@
+<launch>
+
+    <arg name="base_controller_config_file" default="$(find base_controller)/params/base_controller.yaml" />
+
+    <node pkg="base_controller" type="base_controller_pid.py" name="base_controller" output="screen">
+        <rosparam file="$(arg base_controller_config_file)" command="load" />
+    </node>
+
+</launch>
+

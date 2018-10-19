@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/Autonomous_RaceCar/catkin_ws/install
+
+Name: serial_communication
+Description: Description of serial_communication
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ubuntu/Autonomous_RaceCar/catkin_ws/install/lib 
+Requires: 

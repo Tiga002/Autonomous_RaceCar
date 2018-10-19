@@ -1,0 +1,53 @@
+#######################################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Create a Catkin Workspace~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#######################################################################################
+1. mkdir -p ~/catkin_ws/src
+2. cd ~/catkin_ws
+3. catkin_make
+4. source devel/setup.bash 
+
+#######################################################################################
+~~~~~~~~~~~~~~~~   Install Webcam driver usb_cam and image_view ~~~~~~~~~~~~~~~~~~~~~~
+#######################################################################################
+1. sudo apt-get install ros-kinetic-usb-cam
+2. sudo apt-get install ros-kinetic-image-view 
+### Testing
+--> roscore
+--> roslaunch usb_cam usb_cam.launch
+
+######################################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Lane_Detection Package ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+######################################################################################
+1. catkin_create_pkg lane_detection std_msgs sensor_msgs rospy cv_bridge -m Tiga
+2. cm
+3. cd lane_detection/src
+4. chmod +x Image_Processing.py
+
+######################################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ros_object_detector Package ~~~~~~~~~~~~~~~~~~~~~~~~~
+######################################################################################
+1. catkin_create_pkg ros_object_detector std_msgs sensor_msgs rospy roscpp cv_bridge -m Tiga
+2. cm
+3. cd  ros_object_detector/src
+4. edit the package.xml at ros_object_detector/package.xml
+5. add <exec_depend>python-tensorflow-pip</exec_depend>
+4. chmod +x detector_node.py
+5. chmod +x ros_tensorflow.py
+
+######################################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ steering_pid_controller Package ~~~~~~~~~~~~~~~~~~~~~
+######################################################################################
+1. catkin_create_pkg steering_pid_controller std_msgs sensor_msgs rospy -m Tiga
+2. cm
+3. cd steering_pid_controller/src
+4. chmod +x steering_pid_controller.py
+
+######################################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Install Opencv and its dependencies~~~~~~~~~~~~~~~~~
+######################################################################################
+$ sudo apt-get install ros-kinetic-image-transport ros-kinetic-cv-bridge ros-kinetic-vision-opencv python-opencv libopencv-dev ros-kinetic-image-proc
+
+######################################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Install Essential ROS dependencies~~~~~~~~~~~~~~~~~~~
+######################################################################################
+$ sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-teleop-twist-keyboard ros-kinetic-laser-proc ros-kinetic-rgbd-launch ros-kinetic-depthimage-to-laserscan ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python ros-kinetic-rosserial-server ros-kinetic-rosserial-client ros-kinetic-rosserial-msgs ros-kinetic-amcl ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-urdf ros-kinetic-xacro ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers

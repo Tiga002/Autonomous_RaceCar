@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/Autonomous_RaceCar/catkin_ws/install
+
+Name: lane_detection
+Description: Description of lane_detection
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ubuntu/Autonomous_RaceCar/catkin_ws/install/lib 
+Requires: 

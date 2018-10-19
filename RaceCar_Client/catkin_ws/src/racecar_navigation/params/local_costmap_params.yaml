@@ -1,0 +1,55 @@
+local_costmap:
+     
+    ## Parameters for setting the threshold on obstacle information
+    # obstacle_range <--> Robot will only updates its map with information about obstacle within this value
+    # raytrace_range <--> Robot attempts to clear out space in front of its values' meter away given sensor readings
+    obstacle_range : 2.5
+    raytrace_range : 3.0
+    # footprint describe the outfit of the robot >> assume the center is located at [0, 0]
+    footprint: [[-0.32, -0.15], [-0.32, 0.15], [0.32, 0.15], [0.32, -0.15]]
+    footprint_padding: 0.01
+
+    transform_tolerance: 0.5
+
+    #set the update frequences (Hz)
+    update_frequency: 1.0
+
+    # set the publish frequency of the visualization information
+    publish_frequency: 2.0
+
+    # define what coordinate frames the costmap should run in 
+    global_frame: odom
+    
+    # the coordinate frame in costmap should reference for the base of the robot
+    robot_base_frame: base_link
+    
+    # Whether or not the costmap initialize itself based on a map serverd by the map_server
+    static_map: false
+ 
+    # Whether the costmap will remain centered around the robot as the rovot moves through the world
+    rolling_windows: true
+
+    # Setting the width, height and resolution of the costmap || (meters) (meters/cell)
+    width: 2.0
+    height: 2.0
+    resolution: 0.1
+    origin_x: -0.1
+    origin_y: -0.5
+
+    # Constructing the Mulit-Layered Costmap
+    plugins:
+        - {name: sensor_obstacle, type: "costmap_2d::ObstacleLayer"}
+        - {name: inflation, type: "costmap_2d::InflationLayer"}
+    
+    # Define each layer here ....
+    sensor_obstacle:
+        # Observation_sources <--> define a list of sensors going to pass infomation to costmap
+        observation_sources: laser_scan_sensor
+        laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+    inflation:
+        inflation_radius: 0
+        cost_scaling_factor: 6.0
+
+
+
+
