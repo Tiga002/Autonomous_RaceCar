@@ -40,7 +40,7 @@ Since ROS Indigo, ```costmap_2d``` adopts the ***Multi-Layered Costmap Algorithm
 - Each layer tracks one specific type of obstacle 
 - Each layer will modifies the top Master Costmap, which I used for the path planning
 
-![Multi_Layered_Costmap](PC_Server/assets/Multi_Layered_Costmap.png)
+![Multi_Layered_Costmap](assets/Multi_Layered_Costmap.png)
 
 ###Details about some Fundamental layers
 
