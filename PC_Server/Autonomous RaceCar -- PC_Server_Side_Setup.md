@@ -1,4 +1,4 @@
-# Autonomous RaceCar -- Client Side Setup
+# Autonomous RaceCar -- Server Side Setup
 
 Although Nvidia TX1 has better processing capabilities compared to Nvidia TK1, Raspberry Pi, etc, it still not capable for real time path planning. Therefore, a PC server is needed to handle the task. 
 
@@ -407,6 +407,50 @@ def SendToSerial(esc, servo):
     ard.flush()
     send = str(send)
     ard.write(send)
+```
+
+
+
+## Launching Everything Together
+
+As mentioned before, ```costmap_2d``` , ```GlobalPlanner``` as well as ```LocalPlanner```  will be launched once ```move_base``` is told to launch. 
+
+Therefore, in the PC_Server side, we only have to launch ```map_server```, ```amcl```, ```move_base``` , as well as ```rviz``` which is for visualisation and issueing GOAL Point at the same time. 
+
+[RaceCar_Navigation_PID.launch](https://github.com/Tiga002/Autonomous_RaceCar/blob/master/PC_Server/catkin_ws/src/racecar_navigation/launch/RaceCar_Navigation_PID.launch) will launch the Indoor Navigation at the PC_Server Side. 
+
+```html
+<launch>
+    <master auto ="start" />
+     <!-- Run the Map Server -->
+        <node name="map_server" pkg="map_server" type="map_server" args="$(find racecar_navigation)/maps/ROOM_2.yaml" />
+    <!-- Run AMCL -->
+        <include file="$(find racecar_navigation)/launch/RaceCar_AMCL.launch" />
+    <!-- Run Move_Base and its related Nodes -->
+        <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+
+      <!-- 2D Costmap : Global and Local -->
+        <rosparam file="$(find racecar_navigation)/params/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find racecar_navigation)/params/carlike/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find racecar_navigation)/params/carlike/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find racecar_navigation)/params/carlike/global_costmap_params.yaml" command="load" />
+      <!-- Move_Base Configuration -->
+        <rosparam file="$(find racecar_navigation)/params/move_base_params.yaml" command="load" />
+            
+      <!-- Local Planner -->
+        <rosparam file="$(find racecar_navigation)/params/teb_local_planner_params.yaml" command="load" />
+            
+      <!-- Global Planner -->
+        <rosparam file="$(find racecar_navigation)/params/base_global_planner_params.yaml" command="load" /> 
+        </node> 
+    
+    <!-- Run RVIZ for Visualization --> 
+        <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find racecar_navigation)/rviz/RaceCar_Navigation_Visualization.rviz" />  
+    
+    <!-- Ackermann Base Controller with PID -->
+     <node pkg="base_controller" type="PID_Base_Controller.py" name="pid_base_controller_node" /> 
+
+</launch>
 ```
 
 
