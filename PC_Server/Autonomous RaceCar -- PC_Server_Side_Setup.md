@@ -16,7 +16,7 @@ Since ```sensor transforms``` ,```odometry source```, and ```sensor sources``` h
 
 We build the map by running the ```Gmapping``` and saved in with ```map_server``` . The map is a probability based 2D costmap. RaceCar will be using it to understand the surrounding floor plan as to plan the global path. Therefore, ```map_server``` node has to pass the map in a form of ```nav_msgs/GetMap``` with a topic named ```/map``` to the ```costmap_2d``` node. The ```costmap_2d ``` will then generate 2 costmap, a global and local costmaps which is used for global and local path planning. 
 
-![Screenshot 2018-10-22 at 7.09.19 PM.png](/blob/master/PC_Server/assets/Screenshot%202018-10-22%20at%207.09.19%20PM.png?raw=true)
+![Screenshot 2018-10-22 at 7.09.19 PM.png](/https://raw.githubusercontent.com/Tiga002/Autonomous_RaceCar/master/PC_Server/assets/Screenshot%202018-10-22%20at%207.09.19%20PM.png)
 
 To load the map from map_server to costmap_2d by the following command:
 
